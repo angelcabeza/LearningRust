@@ -30,7 +30,8 @@ fn main() {
 
         // In this line, we create a variable named guess (we are shadowing the guess variable that already existed)
         // and we delete spaces at the beggning and ending of the string, then we convert it to a 32 bits integer with parse,
-        // and we check if we could do this operation with expect.
+        // and we check if we could do this operation with match so we can manage the error, in this case if we can parse the
+        // given string we return the number and if not we continue with the next instruction, ignoring the error.
         let guess: u32 =  match guess.trim().parse() {
             Ok(num) => num,
             Err(_) => continue,
@@ -38,6 +39,8 @@ fn main() {
 
         println!("You guessed: {}", guess);
 
+        // In this line we compare the number in guess with the number in secret_number variable and we execute
+        // the associated code depending on the result of the comparation.
         match guess.cmp(&secret_number){
             Ordering::Less => println!("Too small!"),
             Ordering::Greater => println!("Too big!"),
